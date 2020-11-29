@@ -18,4 +18,10 @@
     <ProjectReference Include="..\CustomerAPI.Core\CustomerAPI.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="App_Data\customerdb.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CustomerAPI.Framework\CustomerAPI.Framework.csproj" />
+    <ProjectReference Include="..\CustomerAPI.Infra.Data\CustomerAPI.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>

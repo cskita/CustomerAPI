@@ -33,7 +33,7 @@ namespace CustomerAPI.Infra.Data.Repository.Gender
                 .FirstOrDefault(x => x.Id == id);
 
             if (gender == null)
-                throw new NotFoundException("Gender is not found");
+                throw new NotFoundException("Gender not found");
 
             return gender;
         }

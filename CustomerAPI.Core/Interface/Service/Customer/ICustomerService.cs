@@ -11,5 +11,6 @@ namespace CustomerAPI.Core.Interface.Service.Customer
         BaseResult<List<CustomerModel.Customer>> GetWithAllRelations(CustomerModel.CustomerFilter customerInputModel);
 
         BaseResult<CustomerModel.Customer> GetById(int id);
+        BaseResult<CustomerModel.Customer> GetByIdWithAllRelations(int id);
     }
 }

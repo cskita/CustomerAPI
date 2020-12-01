@@ -33,7 +33,7 @@ namespace CustomerAPI.Infra.Data.Repository.User
                 .FirstOrDefault(x => x.Id == id);
 
             if (userRole == null)
-                throw new NotFoundException("User role is not found");
+                throw new NotFoundException("User role not found");
 
             return userRole;
         }

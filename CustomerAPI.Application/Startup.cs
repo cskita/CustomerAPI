@@ -25,6 +25,7 @@ namespace CustomerAPI.Application
             services.AddSwaggerDependency();
             services.AddAutoMapperDependency();
             services.AddExceptionFilterDependency();
+
             services.AddControllers();
         }
 
@@ -34,6 +35,8 @@ namespace CustomerAPI.Application
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseSwaggerDependency();
 
             app.UseAuthentication();
 

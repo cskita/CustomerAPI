@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using System;
+using Swashbuckle.AspNetCore.Filters;
 
 namespace CustomerAPI.Infra.CrossCutting.IOC
 {
@@ -16,12 +17,38 @@ namespace CustomerAPI.Infra.CrossCutting.IOC
                     Title = "Customer API",
                     Version = "v1",
                     Description = "Documentation of Customer API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Cristiane Stallivieri",
+                        Email = "cstallivieri@gmail.com"
+                    }
                 });
-                opt.AddSecurityDefinition("BasicAuth", new OpenApiSecurityScheme()
+
+                opt.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
-                    Type = SecuritySchemeType.Http,
-                    Scheme = "basic"
+                    Type = SecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Scheme = "bearer"
                 });
+
+                opt.OperationFilter<SecurityRequirementsOperationFilter>();
+
+            });
+        }
+
+        public static void UseSwaggerDependency(this IApplicationBuilder app)
+        {
+            app.UseSwagger(c =>
+            {
+                c.RouteTemplate = "docs/{documentName}/docs.json";
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.DocumentTitle = "Customer API";
+                c.SwaggerEndpoint("/docs/v1/docs.json", "Customer API - v1");
+                c.RoutePrefix = string.Empty;
             });
         }
     }

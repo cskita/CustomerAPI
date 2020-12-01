@@ -57,5 +57,19 @@ namespace CustomerAPI.Service.Customer
                 return BaseResult<CustomerModel.Customer>.NotOK(e.Message);
             }
         }
+
+        public BaseResult<CustomerModel.Customer> GetByIdWithAllRelations(int id)
+        {
+            try
+            {
+                var customer = _customerRepository.GetByIdWithAllRelations(id);
+
+                return BaseResult<CustomerModel.Customer>.OK(customer);
+            }
+            catch (Exception e)
+            {
+                return BaseResult<CustomerModel.Customer>.NotOK(e.Message);
+            }
+        }
     }
 }

@@ -7,6 +7,7 @@ namespace CustomerAPI.Core.Interface.Repository.Customer
     {
         List<CustomerModel.Customer> Get();
         List<CustomerModel.Customer> GetWithAllRelations(CustomerModel.CustomerFilter customerFilter);
-        CustomerModel.Customer GetById(int id);    
+        CustomerModel.Customer GetById(int id);
+        CustomerModel.Customer GetByIdWithAllRelations(int id);
     }
 }

@@ -33,7 +33,7 @@ namespace CustomerAPI.Infra.Data.Repository.Classification
                 .FirstOrDefault(x => x.Id == id);
 
             if (classification == null)
-                throw new NotFoundException("Classification is not found");
+                throw new NotFoundException("Classification not found");
 
             return classification;
         }

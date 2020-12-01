@@ -14,7 +14,7 @@ using CustomerAPI.Application.DTO.Authorization.InputModel;
 using CustomerAPI.Core.Model.User;
 using CustomerAPI.Application.DTO.Authorization.ViewModel;
 using CustomerAPI.Core.Model.Authorization;
-using CustomerAPI.Application.DTO.Seller;
+using CustomerAPI.Application.DTO.Seller.ViewModel;
 using CustomerAPI.Application.DTO.User.ViewModel;
 
 namespace CustomerAPI.Infra.CrossCutting.Adapter
@@ -38,7 +38,8 @@ namespace CustomerAPI.Infra.CrossCutting.Adapter
                 cfg.CreateMap<Gender, GenderViewModel>()
                     .ForMember(d => d.Name, o => o.MapFrom(x => x.Name.Trim()));
                 cfg.CreateMap<Region, RegionViewModel>();
-                cfg.CreateMap<UserSys, SellerViewModel>();
+                cfg.CreateMap<UserSys, SellerViewModel>()
+                    .ForPath(d => d.Name, o => o.MapFrom(x => x.Login));
                 cfg.CreateMap<UserSys, UserViewModel>()
                     .ForPath(d => d.IsAdmin, o => o.MapFrom(x => x.UserRole.IsAdmin));
                 cfg.CreateMap<AuthorizationToken, AuthorizationViewModel>();

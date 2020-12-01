@@ -33,7 +33,7 @@ namespace CustomerAPI.Infra.Data.Repository.Region
                 .FirstOrDefault(x => x.Id == id);
 
             if (region == null)
-                throw new NotFoundException("Region is not found");
+                throw new NotFoundException("Region not found");
 
             return region;
         }

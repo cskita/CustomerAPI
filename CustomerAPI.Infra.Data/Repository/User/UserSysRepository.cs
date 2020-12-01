@@ -33,7 +33,7 @@ namespace CustomerAPI.Infra.Data.Repository.User
                 .FirstOrDefault(x => x.Id == id);
 
             if (user == null)
-                throw new NotFoundException("User is not found");
+                throw new NotFoundException("User not found");
 
             return user;
         }
@@ -54,7 +54,7 @@ namespace CustomerAPI.Infra.Data.Repository.User
                 .FirstOrDefault(x => x.Id == id);
 
             if (user == null)
-                throw new NotFoundException("User is not found");
+                throw new NotFoundException("User not found");
 
             return user;
         }

@@ -47,9 +47,8 @@ namespace CustomerAPI.Application.Controllers.Customer
         // GET api/customer/5
         [HttpGet("{id}")]
         public ActionResult<BaseResult<CustomerViewModel>> Get(int id)
-        {
- 
-            var result = _customerService.GetById(id);
+        { 
+            var result = _customerService.GetByIdWithAllRelations(id);
 
             if (result.Success)
             {

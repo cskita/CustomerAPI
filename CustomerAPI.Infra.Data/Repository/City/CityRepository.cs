@@ -40,7 +40,7 @@ namespace CustomerAPI.Infra.Data.Repository.City
                 .FirstOrDefault(x => x.Id == id);
 
             if (city == null)
-                throw new NotFoundException("City is not found");
+                throw new NotFoundException("City not found");
 
             return city;
         }
@@ -53,7 +53,7 @@ namespace CustomerAPI.Infra.Data.Repository.City
                 .FirstOrDefault(x => x.Id == id);
 
             if (city == null)
-                throw new NotFoundException("City is not found");
+                throw new NotFoundException("City not found");
 
             return city;
         }

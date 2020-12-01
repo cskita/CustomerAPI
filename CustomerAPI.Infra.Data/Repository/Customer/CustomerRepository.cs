@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
 using CustomerAPI.Core.Interface.Repository.Customer;
 using CustomerAPI.Framework.GeneralException;
 using CustomerModel = CustomerAPI.Core.Model.Customer;
-using System;
 
 namespace CustomerAPI.Infra.Data.Repository.Customer
 {
@@ -26,18 +26,6 @@ namespace CustomerAPI.Infra.Data.Repository.Customer
         public List<CustomerModel.Customer> Get()
         {
             return GetQuery().AsNoTracking().ToList();
-        }
-
-        public CustomerModel.Customer GetById(int id)
-        {
-            var customer = GetQuery()
-                .AsNoTracking()
-                .FirstOrDefault(x => x.Id == id);
-
-            if (customer == null)
-                throw new NotFoundException("Customer is not found");
-
-            return customer;
         }
 
         public List<CustomerModel.Customer> GetWithAllRelations(CustomerModel.CustomerFilter customerFilter)
@@ -68,6 +56,35 @@ namespace CustomerAPI.Infra.Data.Repository.Customer
                 customer = customer.Where(x => x.LastPurchase >= customerFilter.LastPurchaseInitial);
 
             return customer.ToList();
+        }
+
+        public CustomerModel.Customer GetById(int id)
+        {
+            var customer = GetQuery()
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == id);
+
+            if (customer == null)
+                throw new NotFoundException("Customer not found");
+
+            return customer;
+        }
+
+        public CustomerModel.Customer GetByIdWithAllRelations(int id)
+        {
+            var customer = GetQuery()
+                .Include(x => x.Gender)
+                .Include(x => x.City)
+                .Include(x => x.Region)
+                .Include(x => x.Classification)
+                .Include(x => x.UserSys)
+                .AsNoTracking()
+                .FirstOrDefault(x => x.Id == id);
+
+            if (customer == null)
+                throw new NotFoundException("Customer not found");
+
+            return customer;
         }
 
     }

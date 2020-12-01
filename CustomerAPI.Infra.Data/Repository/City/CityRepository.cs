@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
-using CityModel = CustomerAPI.Core.Model.City;
 using CustomerAPI.Core.Interface.Repository.City;
 using CustomerAPI.Framework.GeneralException;
+using CityModel = CustomerAPI.Core.Model.City.City;
 
 namespace CustomerAPI.Infra.Data.Repository.City
 {
@@ -17,25 +17,26 @@ namespace CustomerAPI.Infra.Data.Repository.City
             _unitOfWork = unitOfWork;
         }
 
-        private IQueryable<CityModel.City> GetQuery()
+        private IQueryable<CityModel> GetQuery()
         {
-            return _unitOfWork.Query<CityModel.City>();
+            return _unitOfWork.Query<CityModel>();
         }
 
-        public List<CityModel.City> Get()
+        public List<CityModel> Get()
         {
             return GetQuery().AsNoTracking().ToList();
         }
 
-        public List<CityModel.City> GetWithRegion()
+        public List<CityModel> GetWithRegion()
         {
             return GetQuery()
                 .Include(r => r.Region).AsNoTracking().ToList();
         }
 
-        public CityModel.City GetById(int id)
+        public CityModel GetById(int id)
         {
-            var city = GetQuery().AsNoTracking()
+            var city = GetQuery()
+                .AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);
 
             if (city == null)
@@ -44,10 +45,11 @@ namespace CustomerAPI.Infra.Data.Repository.City
             return city;
         }
 
-        public CityModel.City GetByIdWithRegion(int id)
+        public CityModel GetByIdWithRegion(int id)
         {
             var city = GetQuery()
-                .Include(r => r.Region).AsNoTracking()
+                .Include(r => r.Region)
+                .AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);
 
             if (city == null)

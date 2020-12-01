@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
-using ClassificationModel = CustomerAPI.Core.Model.Classification;
 using CustomerAPI.Core.Interface.Repository.Classification;
 using CustomerAPI.Framework.GeneralException;
+using ClassificationModel = CustomerAPI.Core.Model.Classification.Classification;
 
 namespace CustomerAPI.Infra.Data.Repository.Classification
 {
@@ -17,17 +17,17 @@ namespace CustomerAPI.Infra.Data.Repository.Classification
             _unitOfWork = unitOfWork;
         }
 
-        private IQueryable<ClassificationModel.Classification> GetQuery()
+        private IQueryable<ClassificationModel> GetQuery()
         {
-            return _unitOfWork.Query<ClassificationModel.Classification>();
+            return _unitOfWork.Query<ClassificationModel>();
         }
 
-        public List<ClassificationModel.Classification> Get()
+        public List<ClassificationModel> Get()
         {
             return GetQuery().AsNoTracking().ToList();
         }
 
-        public ClassificationModel.Classification GetById(int id)
+        public ClassificationModel GetById(int id)
         {
             var classification = GetQuery().AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);

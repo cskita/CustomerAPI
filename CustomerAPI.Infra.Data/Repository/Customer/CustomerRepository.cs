@@ -2,9 +2,10 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
-using CustomerModel = CustomerAPI.Core.Model.Customer;
 using CustomerAPI.Core.Interface.Repository.Customer;
 using CustomerAPI.Framework.GeneralException;
+using CustomerModel = CustomerAPI.Core.Model.Customer;
+using System;
 
 namespace CustomerAPI.Infra.Data.Repository.Customer
 {
@@ -29,7 +30,8 @@ namespace CustomerAPI.Infra.Data.Repository.Customer
 
         public CustomerModel.Customer GetById(int id)
         {
-            var customer = GetQuery().AsNoTracking()
+            var customer = GetQuery()
+                .AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);
 
             if (customer == null)
@@ -37,5 +39,36 @@ namespace CustomerAPI.Infra.Data.Repository.Customer
 
             return customer;
         }
+
+        public List<CustomerModel.Customer> GetWithAllRelations(CustomerModel.CustomerFilter customerFilter)
+        {
+            var customer = GetQuery()
+                .Include(x => x.Gender)
+                .Include(x => x.City)
+                .Include(x => x.Region)
+                .Include(x => x.Classification)
+                .Include(x => x.UserSys)
+                .AsNoTracking()
+                .ToList()
+                .Where(p => p.Name.StartsWith(customerFilter.Name ?? String.Empty, StringComparison.InvariantCultureIgnoreCase));
+
+            if ((customerFilter.CityId ?? 0) > 0)
+                customer = customer.Where(x => x.CityId == customerFilter.CityId);
+            if ((customerFilter.ClassificationId ?? 0) > 0)
+                customer = customer.Where(x => x.ClassificationId == customerFilter.ClassificationId);
+            if ((customerFilter.GenderId ?? 0) > 0)
+                customer = customer.Where(x => x.GenderId == customerFilter.GenderId);
+            if ((customerFilter.RegionId ?? 0) > 0)
+                customer = customer.Where(x => x.RegionId == customerFilter.RegionId);
+            if ((customerFilter.SellerId ?? 0) > 0)
+                customer = customer.Where(x => x.UserId == customerFilter.SellerId);
+            if (customerFilter.LastPurchaseFinal.HasValue)
+                customer = customer.Where(x => x.LastPurchase <= customerFilter.LastPurchaseFinal);
+            if (customerFilter.LastPurchaseInitial.HasValue)
+                customer = customer.Where(x => x.LastPurchase >= customerFilter.LastPurchaseInitial);
+
+            return customer.ToList();
+        }
+
     }
 }

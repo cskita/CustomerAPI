@@ -17,19 +17,34 @@ namespace CustomerAPI.Application.DTO.Customer.ViewModel
         [SwaggerSchema(Description = "Last purchase of customer")]
         public DateTime LastPurchase { get; set; }
 
-        [SwaggerSchema(Description = "Id gender of customer")]
+        [SwaggerSchema(Description = "Gender ID of customer")]
         public int GenderId { get; set; }
 
-        [SwaggerSchema(Description = "Id city of customer")]
+        [SwaggerSchema(Description = "Gender description of customer")]
+        public string GenderDescription { get; set; }
+
+        [SwaggerSchema(Description = "City ID of customer")]
         public int? CityId { get; set; }
 
-        [SwaggerSchema(Description = "Id region of customer")]
+        [SwaggerSchema(Description = "City description of customer")]
+        public string CityDescription { get; set; }
+
+        [SwaggerSchema(Description = "Region ID of customer")]
         public int? RegionId { get; set; }
 
-        [SwaggerSchema(Description = "Id classification of customer")]
+        [SwaggerSchema(Description = "Region description of customer")]
+        public string RegionDescription { get; set; }
+
+        [SwaggerSchema(Description = "Classification ID of customer")]
         public int? ClassificationId { get; set; }
 
-        [SwaggerSchema(Description = "Id user of customer")]
-        public int? UserId { get; set; }
+        [SwaggerSchema(Description = "Classification description of customer")]
+        public string ClassificationDescription { get; set; }
+
+        [SwaggerSchema(Description = "Seller ID of customer")]
+        public int? SellerId { get; set; }
+
+        [SwaggerSchema(Description = "Seller name of customer")]
+        public string SellerName { get; set; }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CustomerAPI.Framework.Domain;
-using CustomerModel = CustomerAPI.Core.Model.Customer;
 using CustomerAPI.Core.Interface.Service.Customer;
 using CustomerAPI.Core.Interface.Repository.Customer;
+using CustomerModel = CustomerAPI.Core.Model.Customer;
 
 namespace CustomerAPI.Service.Customer
 {
@@ -22,6 +21,20 @@ namespace CustomerAPI.Service.Customer
             try
             {
                 var customers = _customerRepository.Get();
+
+                return BaseResult<List<CustomerModel.Customer>>.OK(customers);
+            }
+            catch (Exception e)
+            {
+                return BaseResult<List<CustomerModel.Customer>>.NotOK(e.Message);
+            }
+        }
+
+        public BaseResult<List<CustomerModel.Customer>> GetWithAllRelations(CustomerModel.CustomerFilter filterModel)
+        {
+            try
+            {
+                var customers = _customerRepository.GetWithAllRelations(filterModel);
 
                 return BaseResult<List<CustomerModel.Customer>>.OK(customers);
             }

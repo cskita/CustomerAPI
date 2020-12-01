@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using CustomerAPI.Application.DTO.Customer.ViewModel;
 using CustomerAPI.Core.Interface.Service.Customer;
 using CustomerAPI.Framework.Domain;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+using CustomerAPI.Application.DTO.Customer.InputModel;
+using CustomerAPI.Core.Model.Customer;
 
 namespace CustomerAPI.Application.Controllers.Customer
 {
@@ -25,9 +25,14 @@ namespace CustomerAPI.Application.Controllers.Customer
 
         // GET: api/customer
         [HttpGet]
-        public ActionResult<BaseResult<List<CustomerViewModel>>> Get()
+        public ActionResult<BaseResult<List<CustomerViewModel>>> Get([FromQuery] CustomerInputModel inputModel)
         {
-            var result = _customerService.Get();
+            CustomerFilter customer = null;
+
+            if (inputModel != null)
+                customer = _mapper.Map<CustomerFilter>(inputModel);
+
+            var result = _customerService.GetWithAllRelations(customer);
 
             if (result.Success)
             {

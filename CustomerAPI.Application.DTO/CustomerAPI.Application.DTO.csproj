@@ -10,10 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="User\InputModel\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CustomerAPI.Framework\CustomerAPI.Framework.csproj" />
   </ItemGroup>
 

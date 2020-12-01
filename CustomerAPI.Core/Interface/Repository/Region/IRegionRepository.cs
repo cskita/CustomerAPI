@@ -1,11 +1,11 @@
 ﻿using System.Collections.Generic;
-using RegionModel = CustomerAPI.Core.Model.Region;
+using RegionModel = CustomerAPI.Core.Model.Region.Region;
 
 namespace CustomerAPI.Core.Interface.Repository.Region
 {
     public interface IRegionRepository
     {
-        List<RegionModel.Region> Get();
-        RegionModel.Region GetById(int id);
+        List<RegionModel> Get();
+        RegionModel GetById(int id);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using CustomerAPI.Service.City;
 using CustomerAPI.Core.Interface.Service.City;
+using CustomerAPI.Service.Classification;
+using CustomerAPI.Core.Interface.Service.Classification;
 using CustomerAPI.Service.Customer;
 using CustomerAPI.Core.Interface.Service.Customer;
 using CustomerAPI.Service.Gender;
@@ -19,6 +21,7 @@ namespace CustomerAPI.Infra.CrossCutting.IOC
         public static void AddServiceDependency(this IServiceCollection services)
         {
             services.AddScoped<ICityService, CityService>();
+            services.AddScoped<IClassificationService, ClassificationService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IRegionService, RegionService>();

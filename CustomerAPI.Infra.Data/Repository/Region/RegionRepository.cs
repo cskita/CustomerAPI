@@ -2,9 +2,9 @@
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
-using RegionModel = CustomerAPI.Core.Model.Region;
 using CustomerAPI.Core.Interface.Repository.Region;
 using CustomerAPI.Framework.GeneralException;
+using RegionModel = CustomerAPI.Core.Model.Region.Region;
 
 namespace CustomerAPI.Infra.Data.Repository.Region
 {
@@ -17,17 +17,17 @@ namespace CustomerAPI.Infra.Data.Repository.Region
             _unitOfWork = unitOfWork;
         }
 
-        private IQueryable<RegionModel.Region> GetQuery()
+        private IQueryable<RegionModel> GetQuery()
         {
-            return _unitOfWork.Query<RegionModel.Region>();
+            return _unitOfWork.Query<RegionModel>();
         }
 
-        public List<RegionModel.Region> Get()
+        public List<RegionModel> Get()
         {
             return GetQuery().AsNoTracking().ToList();
         }
 
-        public RegionModel.Region GetById(int id)
+        public RegionModel GetById(int id)
         {
             var region = GetQuery().AsNoTracking()
                 .FirstOrDefault(x => x.Id == id);

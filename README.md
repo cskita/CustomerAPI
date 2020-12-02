@@ -4,10 +4,10 @@
 
 ## Design Patterns
 
-Model-View-ViewModel 
-Repository
-Dependency Injection
-Inversion of Control
+Model-View-ViewModel  
+Repository  
+Dependency Injection  
+Inversion of Control  
 
 ## Solution Projects
 

@@ -1,6 +1,6 @@
 # CustomerAPI
 
-**_CustomerAPI_** is an ASP.NET Core case solution create to implement a authorization pages using Json Web Token (JWT) and to demonstrate the behavior of a routes of method type GET with some filters using EF Core.
+**_CustomerAPI_** is an ASP.NET API Core case solution create to implement a authorization pages using Json Web Token (JWT) and to demonstrate the behavior of a routes of method type GET with some filters using EF Core.
 
 ## Design Patterns
 

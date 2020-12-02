@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CustomerAPI.Framework.Domain;
 using CustomerAPI.Core.Model.User;
 using CustomerAPI.Core.Interface.Service.User;

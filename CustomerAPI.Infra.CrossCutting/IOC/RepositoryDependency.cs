@@ -9,6 +9,8 @@ using CustomerAPI.Core.Interface.Repository.Gender;
 using CustomerAPI.Infra.Data.Repository.Region;
 using CustomerAPI.Core.Interface.Repository.Region;
 using CustomerAPI.Infra.Data.Repository.Gender;
+using CustomerAPI.Core.Interface.Repository.Seller;
+using CustomerAPI.Infra.Data.Repository.Seller;
 using CustomerAPI.Core.Interface.Repository.User;
 using CustomerAPI.Infra.Data.Repository.User;
 
@@ -23,6 +25,7 @@ namespace CustomerAPI.Infra.CrossCutting.IOC
             services.AddScoped<IClassificationRepository, ClassificationRepository>();
             services.AddScoped<IGenderRepository, GenderRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
+            services.AddScoped<ISellerRepository, SellerRepository>();
             services.AddScoped<IUserRoleRepository, UserRoleRepository>();
             services.AddScoped<IUserSysRepository, UserSysRepository>();
         }

@@ -17,7 +17,7 @@ namespace CustomerAPI.Application.Controllers.Customer
         private readonly IMapper _mapper;
 
         public CustomerController(ICustomerService customerService,
-                                        IMapper mapper)
+                                  IMapper mapper)
         {
             _customerService = customerService;
             _mapper = mapper;

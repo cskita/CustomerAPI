@@ -8,9 +8,6 @@ namespace CustomerAPI.Application.DTO.Authorization.ViewModel
         [SwaggerSchema(Description = "Token of logged user")]
         public string Token { get; set; }
 
-        [SwaggerSchema(Description = "Refresh token of logged user")]
-        public string RefreshToken { get; set; }
-
         [SwaggerSchema(Description = "User data")]
         public UserViewModel User { get; set; }
     }

@@ -9,6 +9,8 @@ using CustomerAPI.Service.Gender;
 using CustomerAPI.Core.Interface.Service.Gender;
 using CustomerAPI.Service.Region;
 using CustomerAPI.Core.Interface.Service.Region;
+using CustomerAPI.Service.Seller;
+using CustomerAPI.Core.Interface.Service.Seller;
 using CustomerAPI.Service.User;
 using CustomerAPI.Core.Interface.Service.User;
 using CustomerAPI.Service.Authorization;
@@ -25,6 +27,7 @@ namespace CustomerAPI.Infra.CrossCutting.IOC
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IGenderService, GenderService>();
             services.AddScoped<IRegionService, RegionService>();
+            services.AddScoped<ISellerService, SellerService>();
             services.AddScoped<IUserRoleService, UserRoleService>();
             services.AddScoped<IUserSysService, UserSysService>();
             services.AddScoped<IAuthorizationService, AuthorizationService>();

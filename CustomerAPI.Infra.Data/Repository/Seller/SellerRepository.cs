@@ -3,16 +3,16 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using CustomerAPI.Infra.Data.Context;
 using CustomerAPI.Core.Model.User;
-using CustomerAPI.Core.Interface.Repository.User;
 using CustomerAPI.Framework.GeneralException;
+using CustomerAPI.Core.Interface.Repository.Seller;
 
-namespace CustomerAPI.Infra.Data.Repository.User
+namespace CustomerAPI.Infra.Data.Repository.Seller
 {
-    public class UserSysRepository : IUserSysRepository
+    public class SellerRepository : ISellerRepository
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public UserSysRepository(IUnitOfWork unitOfWork)
+        public SellerRepository(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -24,40 +24,25 @@ namespace CustomerAPI.Infra.Data.Repository.User
 
         public List<UserSys> Get()
         {
-            return GetQuery().AsNoTracking().ToList();
+            var user = GetQuery()
+                .AsNoTracking()
+                .Include(r => r.UserRole)
+                .Where(x => !x.UserRole.IsAdmin)
+                .ToList();
+
+            return user;
         }
 
         public UserSys GetById(int id)
         {
             var user = GetQuery()
                 .AsNoTracking()
+                .Include(r => r.UserRole)
+                .Where(x => !x.UserRole.IsAdmin)
                 .FirstOrDefault(x => x.Id == id);
 
             if (user == null)
-                throw new NotFoundException("User not found");
-
-            return user;
-        }
-
-        public UserSys GetByLoginAndPassword(UserLogin userLogin)
-        {
-            var user = GetQuery()
-                .AsNoTracking()
-                .Include(r => r.UserRole)
-                .FirstOrDefault(x => x.Email == userLogin.Email && x.Password == userLogin.Password);
-
-            return user;
-        }
-
-        public UserSys GetByIdWithRole(int id)
-        {
-            var user = GetQuery()
-                .AsNoTracking()
-                .Include(r => r.UserRole)
-                .FirstOrDefault(x => x.Id == id);
-
-            if (user == null)
-                throw new NotFoundException("User not found");
+                throw new NotFoundException("Seller not found");
 
             return user;
         }

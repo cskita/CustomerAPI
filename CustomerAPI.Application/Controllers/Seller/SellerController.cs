@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using AutoMapper;
 using CustomerAPI.Application.DTO.Seller.ViewModel;
-using CustomerAPI.Core.Interface.Service.User;
+using CustomerAPI.Core.Interface.Service.Seller;
 using CustomerAPI.Framework.Domain;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,13 +11,13 @@ namespace CustomerAPI.Application.Controllers.Seller
     [ApiController]
     public class SellerController : ControllerBase
     {
-        private readonly IUserSysService _userSysService;
+        private readonly ISellerService _sellerService;
         private readonly IMapper _mapper;
 
-        public SellerController(IUserSysService userSysService,
+        public SellerController(ISellerService sellerService,
                                 IMapper mapper)
         {
-            _userSysService = userSysService;
+            _sellerService = sellerService;
             _mapper = mapper;
         }
 
@@ -25,7 +25,7 @@ namespace CustomerAPI.Application.Controllers.Seller
         [HttpGet]
         public ActionResult<BaseResult<List<SellerViewModel>>> Get()
         {
-            var result = _userSysService.Get();
+            var result = _sellerService.Get();
 
             if (result.Success)
             {
@@ -41,7 +41,7 @@ namespace CustomerAPI.Application.Controllers.Seller
         [HttpGet("{id}")]
         public ActionResult<BaseResult<SellerViewModel>> Get(int id)
         {
-            var result = _userSysService.GetById(id);
+            var result = _sellerService.GetById(id);
 
             if (result.Success)
             {

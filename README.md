@@ -4,7 +4,7 @@
 
 ## Design Patterns
 
-Model-View-ViewModel  
+Model-View-Controller  
 Repository  
 Dependency Injection  
 Inversion of Control  
